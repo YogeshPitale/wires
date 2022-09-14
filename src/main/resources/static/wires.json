@@ -4,7 +4,7 @@
     "pmtRail": "CEO",
     "payoriswells": "Y",
     "payeeiswells": "N",
-    "amt": 25.00,
+    "amt": 2500000000.00,
     "ccy": "USD",
     "nm": "ABC",
     "evtDtTm":"2022-02-16T04:03:19"
@@ -13,7 +13,7 @@
     "pmtRail": "CEO",
     "payoriswells": "Y",
     "payeeiswells": "N",
-    "amt": 65.00,
+    "amt": 650000000.00,
     "ccy": "USD",
     "nm": "ABC",
     "evtDtTm":"2022-02-16T04:03:19"
@@ -22,7 +22,7 @@
     "pmtRail": "CEO",
     "payoriswells": "N",
     "payeeiswells": "Y",
-    "amt": 55.00,
+    "amt": 5500000.00,
     "ccy": "USD",
     "nm": "ABC",
     "evtDtTm":"2022-02-16T04:03:19"
@@ -31,7 +31,7 @@
     "pmtRail": "CEO",
     "payoriswells": "Y",
     "payeeiswells": "N",
-    "amt": 95.00,
+    "amt": 95000000.00,
     "ccy": "USD",
     "nm": "ABC",
     "evtDtTm":"2022-02-16T04:03:19"
@@ -40,7 +40,7 @@
     "pmtRail": "CEO",
     "payoriswells": "N",
     "payeeiswells": "Y",
-    "amt": 35.00,
+    "amt": 35000000.00,
     "ccy": "USD",
     "nm": "ABC",
     "evtDtTm":"2022-02-16T04:03:19"
@@ -49,7 +49,7 @@
     "pmtRail": "CEO",
     "payoriswells": "N",
     "payeeiswells": "Y",
-    "amt": 150.00,
+    "amt": 15000000.00,
     "ccy": "USD",
     "nm": "ABC",
     "evtDtTm":"2022-02-16T04:03:19"
@@ -58,7 +58,7 @@
     "pmtRail": "CEO",
     "payoriswells": "Y",
     "payeeiswells": "N",
-    "amt": 185.00,
+    "amt": 18500000.00,
     "ccy": "USD",
     "nm": "ABC",
     "evtDtTm":"2022-02-16T04:03:19"
@@ -67,7 +67,7 @@
     "pmtRail": "CEO",
     "payoriswells": "Y",
     "payeeiswells": "N",
-    "amt": 250.00,
+    "amt": 2500000.00,
     "ccy": "USD",
     "nm": "ABC",
     "evtDtTm":"2022-02-16T04:03:19"
@@ -76,7 +76,7 @@
     "pmtRail": "CEO",
     "payoriswells": "N",
     "payeeiswells": "Y",
-    "amt": 150.00,
+    "amt": 15000000.00,
     "ccy": "USD",
     "nm": "ABC",
     "evtDtTm":"2022-02-16T04:03:19"
@@ -85,7 +85,7 @@
     "pmtRail": "CEO",
     "payoriswells": "Y",
     "payeeiswells": "N",
-    "amt": 195.00,
+    "amt": 1950000.00,
     "ccy": "USD",
     "nm": "ABC",
     "evtDtTm":"2022-02-16T04:03:19"
