@@ -2,11 +2,14 @@ package com.wf.upo.wires.controller;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ThreadLocalRandom;
 
 import javax.validation.Valid;
 
@@ -48,27 +51,34 @@ public class WireDetailsEventsController {
 		};
 		List<WireDetailsEvent> list = mapper.readValue(is, mapType);
 		for (WireDetailsEvent event : list) {
-			Thread.sleep(2000);
+			Thread.sleep(1000);
 			event.setEvtDtTm(getDtTm());
 			eventProducer.sendEvent_Approach2(event);
 		}
 	}
 
-	// PUT
-//	@PutMapping("/v1/libraryevent")
-//	public ResponseEntity<?> putEvent(@RequestBody @Valid WireDetailsEvent event)
-//			throws JsonProcessingException, ExecutionException, InterruptedException {
-//
-//		if (event.getEventId() == null) {
-//			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Please pass the EventId");
-//		}
-//
-//		event.setEventType(EventType.UPDATE);
-//		eventProducer.sendEvent_Approach2(event);
-//		return ResponseEntity.status(HttpStatus.OK).body(event);
-//	}
+	@PostMapping("/v1/startBulkWireTransfers")
+	public void sendWiresInBulk(@RequestParam int durationInMinutes, @RequestParam int delayInMs) throws IOException, InterruptedException {
+		WireDetailsEvent event;
+		for (int i=0 ; i<durationInMinutes*60; i++) {
+			double randomAmount = round(ThreadLocalRandom.current().nextDouble(100000, 500000),2);
+			if(i%2==0)
+				event=WireDetailsEvent.builder().amt(randomAmount).ccy("USD").nm("Citi").payeeiswells("Y").payoriswells("N").evtDtTm(getDtTm()).build();
+			else
+				event=WireDetailsEvent.builder().amt(randomAmount).ccy("USD").nm("Citi").payeeiswells("N").payoriswells("Y").evtDtTm(getDtTm()).build();
+			Thread.sleep(delayInMs);
+			eventProducer.sendEvent_Approach2(event);
+		}
 
-	public String getDtTm() {
+	}
+	private static double round (double value, int places) {
+		if (places < 0) throw new IllegalArgumentException();
+		BigDecimal bd = BigDecimal.valueOf(value);
+		bd = bd.setScale(places, RoundingMode.HALF_UP);
+		return bd.doubleValue();
+	}
+
+	private String getDtTm() {
 		DateTimeFormatter dtf = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
 		LocalDateTime now = LocalDateTime.now();
 		String evtDtTm = dtf.format(now.withNano(0));

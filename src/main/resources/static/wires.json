@@ -1,19 +1,19 @@
 [
-{
+    {
+        "appId": "PMTS",
+        "pmtRail": "CEO",
+        "payoriswells": "Y",
+        "payeeiswells": "N",
+        "amt": 282493.5,
+        "ccy": "USD",
+        "nm": "ABC",
+        "evtDtTm":"2022-02-16T04:03:19"
+    },{
     "appId": "PMTS",
     "pmtRail": "CEO",
     "payoriswells": "Y",
     "payeeiswells": "N",
-    "amt": 2500000000.00,
-    "ccy": "USD",
-    "nm": "ABC",
-    "evtDtTm":"2022-02-16T04:03:19"
-},{
-    "appId": "PMTS",
-    "pmtRail": "CEO",
-    "payoriswells": "Y",
-    "payeeiswells": "N",
-    "amt": 650000000.00,
+    "amt": 282493.5,
     "ccy": "USD",
     "nm": "ABC",
     "evtDtTm":"2022-02-16T04:03:19"
@@ -22,16 +22,7 @@
     "pmtRail": "CEO",
     "payoriswells": "N",
     "payeeiswells": "Y",
-    "amt": 5500000.00,
-    "ccy": "USD",
-    "nm": "ABC",
-    "evtDtTm":"2022-02-16T04:03:19"
-},{
-    "appId": "PMTS",
-    "pmtRail": "CEO",
-    "payoriswells": "Y",
-    "payeeiswells": "N",
-    "amt": 95000000.00,
+    "amt": 726837.5,
     "ccy": "USD",
     "nm": "ABC",
     "evtDtTm":"2022-02-16T04:03:19"
@@ -40,52 +31,7 @@
     "pmtRail": "CEO",
     "payoriswells": "N",
     "payeeiswells": "Y",
-    "amt": 35000000.00,
-    "ccy": "USD",
-    "nm": "ABC",
-    "evtDtTm":"2022-02-16T04:03:19"
-},{
-    "appId": "PMTS",
-    "pmtRail": "CEO",
-    "payoriswells": "N",
-    "payeeiswells": "Y",
-    "amt": 15000000.00,
-    "ccy": "USD",
-    "nm": "ABC",
-    "evtDtTm":"2022-02-16T04:03:19"
-},{
-    "appId": "PMTS",
-    "pmtRail": "CEO",
-    "payoriswells": "Y",
-    "payeeiswells": "N",
-    "amt": 18500000.00,
-    "ccy": "USD",
-    "nm": "ABC",
-    "evtDtTm":"2022-02-16T04:03:19"
-},{
-    "appId": "PMTS",
-    "pmtRail": "CEO",
-    "payoriswells": "Y",
-    "payeeiswells": "N",
-    "amt": 2500000.00,
-    "ccy": "USD",
-    "nm": "ABC",
-    "evtDtTm":"2022-02-16T04:03:19"
-},{
-    "appId": "PMTS",
-    "pmtRail": "CEO",
-    "payoriswells": "N",
-    "payeeiswells": "Y",
-    "amt": 15000000.00,
-    "ccy": "USD",
-    "nm": "ABC",
-    "evtDtTm":"2022-02-16T04:03:19"
-},{
-    "appId": "PMTS",
-    "pmtRail": "CEO",
-    "payoriswells": "Y",
-    "payeeiswells": "N",
-    "amt": 1950000.00,
+    "amt": 726837.5,
     "ccy": "USD",
     "nm": "ABC",
     "evtDtTm":"2022-02-16T04:03:19"
