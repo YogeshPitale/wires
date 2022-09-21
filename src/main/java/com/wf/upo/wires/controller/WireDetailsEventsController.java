@@ -13,6 +13,8 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import javax.validation.Valid;
 
+import lombok.extern.slf4j.Slf4j;
+import lombok.extern.slf4j.XSlf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,11 +29,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wf.upo.wires.domain.WireDetailsEvent;
 import com.wf.upo.wires.producer.WireDetailsEventProducer;
 
+@Slf4j
 @RestController
 public class WireDetailsEventsController {
 
 	@Autowired
 	WireDetailsEventProducer eventProducer;
+
+	String [] pmtRails = {"CEO","RTL","XCCY","OBL"};
 
 	@PostMapping("/v1/psrm/account")
 	public ResponseEntity<WireDetailsEvent> postEvent(@RequestParam HashMap<String, Double> req,
@@ -50,22 +55,28 @@ public class WireDetailsEventsController {
 		TypeReference<List<WireDetailsEvent>> mapType = new TypeReference<List<WireDetailsEvent>>() {
 		};
 		List<WireDetailsEvent> list = mapper.readValue(is, mapType);
+		int counter=0;
 		for (WireDetailsEvent event : list) {
 			Thread.sleep(1000);
 			event.setEvtDtTm(getDtTm());
+			event.setPmtRail(pmtRails[counter%4]);
 			eventProducer.sendEvent_Approach2(event);
+			counter++;
 		}
 	}
 
 	@PostMapping("/v1/startBulkWireTransfers")
 	public void sendWiresInBulk(@RequestParam int durationInMinutes, @RequestParam int delayInMs) throws IOException, InterruptedException {
 		WireDetailsEvent event;
+
 		for (int i=0 ; i<durationInMinutes*60; i++) {
 			double randomAmount = round(ThreadLocalRandom.current().nextDouble(100000, 500000),2);
 			if(i%2==0)
 				event=WireDetailsEvent.builder().amt(randomAmount).ccy("USD").nm("Citi").payeeiswells("Y").payoriswells("N").evtDtTm(getDtTm()).build();
 			else
 				event=WireDetailsEvent.builder().amt(randomAmount).ccy("USD").nm("Citi").payeeiswells("N").payoriswells("Y").evtDtTm(getDtTm()).build();
+			event.setPmtRail(pmtRails[i%4]);
+			log.info(event.getPmtRail());
 			Thread.sleep(delayInMs);
 			eventProducer.sendEvent_Approach2(event);
 		}
