@@ -36,7 +36,8 @@ public class WireDetailsEventsController {
 	@Autowired
 	WireDetailsEventProducer eventProducer;
 
-	String [] pmtRails = {"CEO","RTL","XCCY","OBL"};
+	String [] pmtRails = {"OBL","CEO","XCCY","RTL"};
+	String [] banks = {"Bank of America","CITI","JPMorgan Chase","US Bankcorp"};
 
 	@PostMapping("/v1/psrm/account")
 	public ResponseEntity<WireDetailsEvent> postEvent(@RequestParam HashMap<String, Double> req,
@@ -57,10 +58,10 @@ public class WireDetailsEventsController {
 		List<WireDetailsEvent> list = mapper.readValue(is, mapType);
 		int counter=0;
 		for (WireDetailsEvent event : list) {
-			Thread.sleep(1000);
 			event.setEvtDtTm(getDtTm());
 			event.setPmtRail(pmtRails[counter%4]);
 			eventProducer.sendEvent_Approach2(event);
+			Thread.sleep(2000);
 			counter++;
 		}
 	}
@@ -70,13 +71,12 @@ public class WireDetailsEventsController {
 		WireDetailsEvent event;
 
 		for (int i=0 ; i<durationInMinutes*60; i++) {
-			double randomAmount = round(ThreadLocalRandom.current().nextDouble(100000, 500000),2);
+			double randomAmount = round(ThreadLocalRandom.current().nextDouble(100000, 999999),2);
 			if(i%2==0)
-				event=WireDetailsEvent.builder().amt(randomAmount).ccy("USD").nm("Citi").payeeiswells("Y").payoriswells("N").evtDtTm(getDtTm()).build();
+				event=WireDetailsEvent.builder().amt(randomAmount).ccy("USD").pmtRail(pmtRails[i%4]).nm(banks[i%4]).payeeiswells("Y").payoriswells("N").evtDtTm(getDtTm()).build();
 			else
-				event=WireDetailsEvent.builder().amt(randomAmount).ccy("USD").nm("Citi").payeeiswells("N").payoriswells("Y").evtDtTm(getDtTm()).build();
-			event.setPmtRail(pmtRails[i%4]);
-			log.info(event.getPmtRail());
+				event=WireDetailsEvent.builder().amt(randomAmount).ccy("USD").pmtRail(pmtRails[i%4]).nm(banks[i%4]).payeeiswells("N").payoriswells("Y").evtDtTm(getDtTm()).build();
+
 			Thread.sleep(delayInMs);
 			eventProducer.sendEvent_Approach2(event);
 		}

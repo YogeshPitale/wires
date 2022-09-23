@@ -2,8 +2,8 @@
     {
         "appId": "PMTS",
         "pmtRail": "CEO",
-        "payoriswells": "Y",
-        "payeeiswells": "N",
+        "payoriswells": "N",
+        "payeeiswells": "Y",
         "amt": 282493.5,
         "ccy": "USD",
         "nm": "ABC",
@@ -11,8 +11,8 @@
     },{
     "appId": "PMTS",
     "pmtRail": "CEO",
-    "payoriswells": "Y",
-    "payeeiswells": "N",
+    "payoriswells": "N",
+    "payeeiswells": "Y",
     "amt": 282493.5,
     "ccy": "USD",
     "nm": "ABC",
@@ -20,8 +20,8 @@
 },{
     "appId": "PMTS",
     "pmtRail": "CEO",
-    "payoriswells": "N",
-    "payeeiswells": "Y",
+    "payoriswells": "Y",
+    "payeeiswells": "N",
     "amt": 726837.5,
     "ccy": "USD",
     "nm": "ABC",
@@ -29,8 +29,8 @@
 },{
     "appId": "PMTS",
     "pmtRail": "XCCY",
-    "payoriswells": "N",
-    "payeeiswells": "Y",
+    "payoriswells": "Y",
+    "payeeiswells": "N",
     "amt": 726837.5,
     "ccy": "USD",
     "nm": "ABC",
