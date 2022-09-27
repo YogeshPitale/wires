@@ -67,16 +67,21 @@ public class WireDetailsEventsController {
 	}
 
 	@PostMapping("/v1/startBulkWireTransfers")
-	public void sendWiresInBulk(@RequestParam int durationInMinutes, @RequestParam int delayInMs) throws IOException, InterruptedException {
+	public void sendWiresInBulk(@RequestParam int durationInMinutes, @RequestParam int delayInMs, @RequestParam String transactionType) throws IOException, InterruptedException {
 		WireDetailsEvent event;
 
 		for (int i=0 ; i<durationInMinutes*60; i++) {
 			double randomAmount = round(ThreadLocalRandom.current().nextDouble(100000, 999999),2);
-			if(i%2==0)
+			if(transactionType.equalsIgnoreCase("credit"))
 				event=WireDetailsEvent.builder().amt(randomAmount).ccy("USD").pmtRail(pmtRails[i%4]).nm(banks[i%4]).payeeiswells("Y").payoriswells("N").evtDtTm(getDtTm()).build();
-			else
+			else if(transactionType.equalsIgnoreCase("debit"))
 				event=WireDetailsEvent.builder().amt(randomAmount).ccy("USD").pmtRail(pmtRails[i%4]).nm(banks[i%4]).payeeiswells("N").payoriswells("Y").evtDtTm(getDtTm()).build();
-
+			else {
+				if (i % 2 == 0)
+					event = WireDetailsEvent.builder().amt(randomAmount).ccy("USD").pmtRail(pmtRails[i % 4]).nm(banks[i % 4]).payeeiswells("Y").payoriswells("N").evtDtTm(getDtTm()).build();
+				else
+					event = WireDetailsEvent.builder().amt(randomAmount).ccy("USD").pmtRail(pmtRails[i % 4]).nm(banks[i % 4]).payeeiswells("N").payoriswells("Y").evtDtTm(getDtTm()).build();
+			}
 			Thread.sleep(delayInMs);
 			eventProducer.sendEvent_Approach2(event);
 		}
