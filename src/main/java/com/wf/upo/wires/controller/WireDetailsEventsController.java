@@ -59,7 +59,7 @@ public class WireDetailsEventsController {
 		int counter=0;
 		for (WireDetailsEvent event : list) {
 			event.setEvtDtTm(getDtTm());
-			event.setPmtRail(pmtRails[counter%4]);
+			//event.setPmtRail(pmtRails[counter%4]);
 			eventProducer.sendEvent_Approach2(event);
 			Thread.sleep(2000);
 			counter++;
