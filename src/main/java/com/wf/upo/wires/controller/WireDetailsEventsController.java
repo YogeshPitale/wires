@@ -37,7 +37,7 @@ public class WireDetailsEventsController {
 	WireDetailsEventProducer eventProducer;
 
 	String [] pmtRails = {"OBL","CEO","XCCY","RTL"};
-	String [] banks = {"Bank of America","CITI","JPMorgan Chase","US Bankcorp"};
+	String [] banks = {"Bank of America","CITI","JPMorgan Chase","US Bankcorp","Goldman Sachs","PNC Financial Services"};
 
 	@PostMapping("/v1/psrm/account")
 	public ResponseEntity<WireDetailsEvent> postEvent(@RequestParam HashMap<String, Double> req,
@@ -78,9 +78,9 @@ public class WireDetailsEventsController {
 				event=WireDetailsEvent.builder().appId("PMTS").amt(randomAmount).ccy("USD").pmtRail(pmtRails[i%4]).nm(banks[i%4]).payeeiswells("N").payoriswells("Y").evtDtTm(getDtTm()).build();
 			else {
 				if (i % 2 == 0)
-					event = WireDetailsEvent.builder().appId("PMTS").amt(randomAmount).ccy("USD").pmtRail(pmtRails[i % 4]).nm(banks[i % 4]).payeeiswells("Y").payoriswells("N").evtDtTm(getDtTm()).build();
+					event = WireDetailsEvent.builder().appId("PMTS").amt(randomAmount).ccy("USD").pmtRail(pmtRails[i % 4]).nm(banks[i % 6]).payeeiswells("Y").payoriswells("N").evtDtTm(getDtTm()).build();
 				else
-					event = WireDetailsEvent.builder().appId("PMTS").amt(randomAmount).ccy("USD").pmtRail(pmtRails[i % 4]).nm(banks[i % 4]).payeeiswells("N").payoriswells("Y").evtDtTm(getDtTm()).build();
+					event = WireDetailsEvent.builder().appId("PMTS").amt(randomAmount).ccy("USD").pmtRail(pmtRails[i % 4]).nm(banks[i % 6]).payeeiswells("N").payoriswells("Y").evtDtTm(getDtTm()).build();
 			}
 			Thread.sleep(delayInMs);
 			eventProducer.sendEvent_Approach2(event);
