@@ -61,26 +61,26 @@ public class WireDetailsEventsController {
 			event.setEvtDtTm(getDtTm());
 			//event.setPmtRail(pmtRails[counter%4]);
 			eventProducer.sendEvent_Approach2(event);
-			Thread.sleep(2000);
+			Thread.sleep(1000);
 			counter++;
 		}
 	}
 
 	@PostMapping("/v1/startBulkWireTransfers")
-	public void sendWiresInBulk(@RequestParam int durationInMinutes, @RequestParam int delayInMs, @RequestParam String transactionType) throws IOException, InterruptedException {
+	public void sendWiresInBulk(@RequestParam int noOfWires, @RequestParam int delayInMs, @RequestParam String transactionType,@RequestParam Double fromAmount, @RequestParam Double toAmount) throws IOException, InterruptedException {
 		WireDetailsEvent event;
 
-		for (int i=0 ; i<durationInMinutes*60; i++) {
-			double randomAmount = round(ThreadLocalRandom.current().nextDouble(100000, 999999),2);
+		for (int i=0 ; i<noOfWires; i++) {
+			double randomAmount = round(ThreadLocalRandom.current().nextDouble(fromAmount, toAmount),2);
 			if(transactionType.equalsIgnoreCase("credit"))
-				event=WireDetailsEvent.builder().amt(randomAmount).ccy("USD").pmtRail(pmtRails[i%4]).nm(banks[i%4]).payeeiswells("Y").payoriswells("N").evtDtTm(getDtTm()).build();
+				event=WireDetailsEvent.builder().appId("PMTS").amt(randomAmount).ccy("USD").pmtRail(pmtRails[i%4]).nm(banks[i%4]).payeeiswells("Y").payoriswells("N").evtDtTm(getDtTm()).build();
 			else if(transactionType.equalsIgnoreCase("debit"))
-				event=WireDetailsEvent.builder().amt(randomAmount).ccy("USD").pmtRail(pmtRails[i%4]).nm(banks[i%4]).payeeiswells("N").payoriswells("Y").evtDtTm(getDtTm()).build();
+				event=WireDetailsEvent.builder().appId("PMTS").amt(randomAmount).ccy("USD").pmtRail(pmtRails[i%4]).nm(banks[i%4]).payeeiswells("N").payoriswells("Y").evtDtTm(getDtTm()).build();
 			else {
 				if (i % 2 == 0)
-					event = WireDetailsEvent.builder().amt(randomAmount).ccy("USD").pmtRail(pmtRails[i % 4]).nm(banks[i % 4]).payeeiswells("Y").payoriswells("N").evtDtTm(getDtTm()).build();
+					event = WireDetailsEvent.builder().appId("PMTS").amt(randomAmount).ccy("USD").pmtRail(pmtRails[i % 4]).nm(banks[i % 4]).payeeiswells("Y").payoriswells("N").evtDtTm(getDtTm()).build();
 				else
-					event = WireDetailsEvent.builder().amt(randomAmount).ccy("USD").pmtRail(pmtRails[i % 4]).nm(banks[i % 4]).payeeiswells("N").payoriswells("Y").evtDtTm(getDtTm()).build();
+					event = WireDetailsEvent.builder().appId("PMTS").amt(randomAmount).ccy("USD").pmtRail(pmtRails[i % 4]).nm(banks[i % 4]).payeeiswells("N").payoriswells("Y").evtDtTm(getDtTm()).build();
 			}
 			Thread.sleep(delayInMs);
 			eventProducer.sendEvent_Approach2(event);
