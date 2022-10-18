@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wires-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: wires
+  template:
+    metadata:
+      labels:
+        component: wires
+    spec:
+      containers:
+        - name: wires
+          image: yogeshpitale/wires:latest
+          ports:
+            - containerPort: 8090
+          imagePullPolicy: Always
